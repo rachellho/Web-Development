@@ -1,0 +1,133 @@
+# Web-Development
+#Connection to MYSQL
+import mysql.connector
+
+#open the file for reading
+file_open = open("filename", "r")
+#turn the string from the file into a list
+text = file_open.split(" ")
+
+#connect to MYSQL database for storing the ID and the Session State Information
+connection_data = mymysql.connector.cocnnect("localhost", "root", "network", "data")
+#connect to MYSQL database for storing True or False based on whether the text contains the given information
+connection_status = mysql.connector.connect("localhost", "root", "network", "status")
+
+#setup connection to input data to MYSQL database
+data_cursor = connection_data.cursor()
+status_cursor = connection_status.cursor()
+
+#stores the information to be imported to the Status database
+status_sql = ""
+#stores the information to be imported to the Data database
+data_sql = ""
+
+#stores the words that are between ID and next ID
+list_compare = []
+
+#search for keywords IDin the file and stores this information to the database
+#use a for loop to go through each word in file
+for i in range(0, len(text)-1) :
+  #check text for each instance of keyword "ID"
+  if text[i] == "ID":
+    #keyword found input the ID to first database
+    id = text[i+1]
+    data_sql = "INSERT INTO data(information) VALUES (id)"
+    data_cursor.execute(data_sql)
+    connection_data.commit()
+    #search for index of next instance of "id" in file
+    next_index = i
+    state = True
+    #loops through the text file until next occurance of "id" after the most recent occurnace of "id" is found
+    while state == True:
+      if text[index_next] == "id":
+        next = next_index
+        break
+       else:
+        next_index += 1
+        
+     #creates a list of the occurance of "id" to the next occurance of "id"
+     for spot in range(i, next_index - ):
+      list_compare.append(text[spot])
+      
+      
+      #variables to store the string that is required to check in the file
+      string_one = "Source template"
+      string_two = "special"
+      state_true = "Found"
+      string_six = "period"
+      state_false = "Not Found"
+      #checks for occurnace of required strings from the text between the occurnace of "id" and the next occurance of "id"
+      for x in range(i, next_index):
+        #search for string "source template" after find id
+        #string "source template" found
+        if any(item in string_one for item in list_compare):
+          status_sql = "INSERT INTO status(port_found) VALUES (state_true)"
+          status_cursor.execute(status_sql)
+          connection_status.commit()
+         #input to status database that is False that the string "source template" is in the text
+          else:
+            status_sql = "INSERT INTO status(port_found) VALUES (state_false)"
+            status_cursor.execute(status_sql)
+            connection_status.commit()
+            
+         #search for string "Source template" and "special" after find interface
+         if any(item in string_one for item in list_compare) and any(item in string_two for item in list_compare):
+         `#keyword found, input that it is True to the status database
+         `status_sql = "INSERT INTO status(special_state) VALUES (state_true)"
+         `status_cursor.execute(status_sql)
+          connection_status.commit()
+          
+         #stores the strings that are required to be searched for in the file
+         string_three = "time"
+         string_four = "place"
+         string_five = "happy"
+         
+         #stores the state of the session to be imported to the data database
+         session_state = ""
+         #search for string "time" and "place" after finding id
+         if any(item in string_three for item in list_compare) and any(item in string_four for item in list_compare):
+          #keyword found, input that it is True to the status database
+          status_sql = "INSERT INTO status(place_state) VALUES (state_true)"
+          status_cursor.execute(status_sql)
+          connection_status.commit()
+          else:
+            #input to the status database that it is False that the string"time" and "place" is found
+            status_sql = "INSERT INTO status(place_state) VALUES (state_true)"
+            status_cursor.execute(status_sql)
+            connection_status.commit()
+             
+          #Search for string "period" after id
+          if any(item in string_six for item in list_compare):
+            status_sql = "INSERT INTO status(session) VALUES (state_true)"
+            status_cursor.execute(status_sql)
+            connection_status.commit()
+           #input to the status database that it is false that "period" is found
+           else:
+            status_sql = "INSERT INTO status(session) VALUES (state_false)"
+            status_cursor.execute(status)
+            connection_status.commit()
+          
+         #Search for string "time" AND NOT "place"
+         if any(item in string_three for item in list_compare) and any(item in string_four for item in list_compare) == False:
+          status_sql = "INSERT INTO status(Authentication) VALUES (state_true)"
+          status_cursor.execute(status_sql)
+          connection_status.commit()
+         
+         #Search for string "access" after finding "id"to store the state of access of the id
+         if list_compare[x] == "access""
+          session_time = list_compare[x+1]
+          data_sql = "INSERT INTO data(Access_session) VALUES (session_time)"
+          data_cursor.execute(data_sql)
+          connection_data.commit()
+         
+         #Increment the index to check for next occurance of "id" in the text file
+         i += 1;
+         #Increment the index to check each string in the id block
+         x+=1
+ 
+           
+#close opened file
+file_open.close()
+            
+        
+        
